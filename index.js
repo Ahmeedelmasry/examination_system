@@ -20,6 +20,19 @@ const stNotifs = require("./routes/students/notifications");
 //Create our express app
 const app = express();
 
+//Handle Cors and Middleware
+app.use((req, res, next) => {
+  res
+    .header("Access-Control-Allow-Origin", "*")
+    .header("Access-Control-Allow-Methods", "GET, POST, HEAD, PUT, DELETE")
+    .header(
+      "Access-Control-Allow-Headers",
+      "auth-token, Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    )
+    .header("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 //Database Stuff
 mongoose
   .connect(process.env.DB_URI, {
@@ -34,19 +47,6 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
-
-//Handle Cors and Middleware
-app.use((req, res, next) => {
-  res
-    .header("Access-Control-Allow-Origin", "*")
-    .header("Access-Control-Allow-Methods", "GET, POST, HEAD, PUT, DELETE")
-    .header(
-      "Access-Control-Allow-Headers",
-      "auth-token, Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    )
-    .header("Access-Control-Allow-Credentials", true);
-  next();
-});
 
 //Config
 app.use(bodyParser.json());
