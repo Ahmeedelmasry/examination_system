@@ -97,7 +97,7 @@ const uploadSecurityImages = async (req, res) => {
   files.image.forEach(async (file, i) => {
     const filePath = path.join(
       __dirname,
-      "../../profileImgs/securityImages",
+      dir,
       `${req.params.email}/${req.params.email}-${i}.jpg`
     );
 
