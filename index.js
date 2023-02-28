@@ -33,21 +33,6 @@ app.use((req, res, next) => {
   next();
 });
 
-//Database Stuff
-mongoose
-  .connect(process.env.DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Mongo Db Connected .."))
-  .then(() => {
-    //Starting server
-    app.listen(process.env.PORT, () => {
-      console.log(`Listining at port ${process.env.PORT}`);
-    });
-  })
-  .catch((err) => console.log(err));
-
 //Config
 app.use(bodyParser.json());
 
@@ -80,3 +65,19 @@ app.use("/follows", doFollow);
 app.use("/shares", shareExam);
 app.use("/saved-urls", savedUrls);
 app.use("/st-notifs", stNotifs);
+
+
+//Database Stuff
+mongoose
+  .connect(process.env.DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Mongo Db Connected .."))
+  .then(() => {
+    //Starting server
+    app.listen(process.env.PORT, () => {
+      console.log(`Listining at port ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => console.log(err));
