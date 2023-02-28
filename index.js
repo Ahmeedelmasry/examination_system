@@ -49,6 +49,8 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+const rootDir = __dirname;
+
 //Config
 app.use(bodyParser.json());
 
@@ -81,3 +83,6 @@ app.use("/follows", doFollow);
 app.use("/shares", shareExam);
 app.use("/saved-urls", savedUrls);
 app.use("/st-notifs", stNotifs);
+
+module.exports = rootDir;
+
