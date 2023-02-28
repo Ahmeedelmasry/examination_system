@@ -13,6 +13,7 @@ const isLogged = async (req, res, next) => {
           res.json({ serverError: "Internal server error" });
         } else {
           let user = await signupSchema.findById(decodedToken.id);
+          console.log(user);
           user.password = "";
           res.json(user);
         }
