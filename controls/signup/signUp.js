@@ -69,7 +69,6 @@ const postSignup = async (req, res) => {
       profileImg: req.body.profileImg,
       sectionNo: req.body.userRole == "STUDENT" ? req.body.sectionNo : "",
       gradeNo: req.body.userRole == "STUDENT" ? req.body.gradeNo : "",
-      securityImgs: req.body.securityImgs,
     });
     const token = generToken(newUser._id);
     res.cookie("jwt", token, {
