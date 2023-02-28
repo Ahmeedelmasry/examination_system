@@ -86,15 +86,18 @@ const postSignup = async (req, res) => {
 };
 
 const uploadSecurityImages = async (req, res) => {
+  var dir = "../../profileImgs/securityImages";
   const files = req.files;
   const imgsArr = [];
+
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
   files.image.forEach(async (file, i) => {
     const filePath = path.join(
-      __dirname,
-      "../../profileImgs/securityImages",
+      dir,
       `${req.params.email}/${req.params.email}-${i}.jpg`
     );
-
     file.mv(filePath, (err) => {
       if (err)
         return res.status(500).json({ status: "error", message: "error" });
