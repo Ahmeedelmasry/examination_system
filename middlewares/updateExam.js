@@ -4,29 +4,31 @@ const ShareSchema = require("../models/shares/shareExam");
 //Instructor Exams
 const updateExamWar = async (req, res, next) => {
   const exams = await ExamSchema.find({ instructorUserId: req.params.id });
-  exams.forEach(async (exam) => {
-    const examDate = new Date(`${exam.startDate} ${exam.endTimeAt}`);
+  for (let i = 0; i < exams.length; i++) {
+    const examDate = new Date(`${exams[i].startDate} ${exams[i].endTimeAt}`);
     const dateNow = new Date();
     if (examDate - dateNow < 0) {
       await ExamSchema.updateOne(
-        { _id: exam._id },
+        { _id: exams[i]._id },
         {
           status: "Closed",
         }
       );
     } else {
-      const startTime = new Date(`${exam.startDate} ${exam.startTimeAt}`);
+      const startTime = new Date(
+        `${exams[i].startDate} ${exams[i].startTimeAt}`
+      );
       const timeNow = new Date();
       if (startTime - timeNow < 0) {
         await ExamSchema.updateOne(
-          { _id: exam._id },
+          { _id: exams[i]._id },
           {
             status: "Open",
           }
         );
       }
     }
-  });
+  }
   setTimeout(() => {
     next();
   }, 200);
