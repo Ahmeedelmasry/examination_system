@@ -5,7 +5,7 @@ const ShareSchema = require("../models/shares/shareExam");
 const updateExamWar = async (req, res, next) => {
   try {
     const exams = await ExamSchema.find({ instructorUserId: req.params.id });
-    const dateNow = new Date(new Date().getTime() + 120000);
+    const dateNow = new Date(new Date().getTime() + 2 * 60 * 60 * 1000);
     console.log("Last Edit .. Adding 2 hrs to local time", dateNow);
     for (let i = 0; i < exams.length; i++) {
       const examDate = new Date(`${exams[i].startDate} ${exams[i].endTimeAt}`);
