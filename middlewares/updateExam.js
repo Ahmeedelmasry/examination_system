@@ -10,8 +10,6 @@ const updateExamWar = async (req, res, next) => {
     const dateNow = isHosted
       ? new Date(new Date().getTime() + 2 * 60 * 60 * 1000)
       : new Date();
-    console.log("isDomain", isHosted);
-    console.log("Last Edit .. Adding 2 hrs to local time", dateNow);
     for (let i = 0; i < exams.length; i++) {
       const examDate = new Date(`${exams[i].startDate} ${exams[i].endTimeAt}`);
       if (examDate - dateNow < 0) {
