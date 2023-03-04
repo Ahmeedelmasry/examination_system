@@ -29,7 +29,10 @@ const updateExamWar = async (req, res, next) => {
       }
     }
   }
-  next();
+  const examss = await ExamSchema.find({ instructorUserId: req.params.id });
+  setTimeout(() => {
+    next();
+  }, 1000);
 };
 
 //Students Exams
