@@ -60,8 +60,8 @@ app.use(cookieParser());
 app.use(
   cors({
     credential: true,
-    // origin: true,
-    origin: "https://online-exam-system-9b41e.web.app/",
+    origin: true,
+    // origin: "https://online-exam-system-9b41e.web.app",
   })
 );
 
