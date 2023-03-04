@@ -104,6 +104,7 @@ const GetStSharedExams = async (req, res) => {
       }
     }
   }
+  console.log(myExams);
   res.json(myExams);
 };
 

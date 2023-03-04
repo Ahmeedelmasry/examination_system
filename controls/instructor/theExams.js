@@ -27,6 +27,7 @@ const getAllExams = async (req, res) => {
       }
     }
   }
+  console.log(exams);
   res.json(exams);
 };
 
