@@ -14,6 +14,12 @@ const updateExamWar = async (req, res, next) => {
           status: "Closed",
         }
       );
+      await ExamSchema.updateOne(
+        { _id: exams[i]._id },
+        {
+          status: "Closed",
+        }
+      );
     } else {
       const startTime = new Date(
         `${exams[i].startDate} ${exams[i].startTimeAt}`
@@ -26,13 +32,17 @@ const updateExamWar = async (req, res, next) => {
             status: "Open",
           }
         );
+        await ExamSchema.updateOne(
+          { _id: exams[i]._id },
+          {
+            status: "Open",
+          }
+        );
       }
     }
   }
   const examss = await ExamSchema.find({ instructorUserId: req.params.id });
-  setTimeout(() => {
-    next();
-  }, 1000);
+  next();
 };
 
 //Students Exams
