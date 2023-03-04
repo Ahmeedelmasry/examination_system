@@ -12,8 +12,10 @@ const deleteExam = async (req, res) => {
 };
 
 const getAllExams = async (req, res) => {
-  const exams = await ExamSchema.find({ instructorUserId: req.params.id });
-  res.json(exams);
+  setTimeout(async () => {
+    const exams = await ExamSchema.find({ instructorUserId: req.params.id });
+    res.json(exams);
+  }, 1000);
 };
 
 const getOneExam = async (req, res) => {
