@@ -25,8 +25,7 @@ const updateExamWar = async (req, res, next) => {
         const startTime = new Date(
           `${exams[i].startDate} ${exams[i].startTimeAt}`
         );
-        const timeNow = new Date();
-        if (startTime - timeNow < 0) {
+        if (startTime - dateNow < 0) {
           await ExamSchema.updateOne(
             { _id: exams[i]._id },
             {
@@ -36,9 +35,7 @@ const updateExamWar = async (req, res, next) => {
         }
       }
     }
-    setTimeout(() => {
-      next();
-    }, 1000);
+    next();
   } catch (error) {
     console.log(error);
     res.json({ error: true });
