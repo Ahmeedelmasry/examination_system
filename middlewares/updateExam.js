@@ -8,12 +8,13 @@ const updateExamWar = async (req, res, next) => {
     const examDate = new Date(`${exams[i].startDate} ${exams[i].endTimeAt}`);
     const dateNow = new Date();
     if (examDate - dateNow < 0) {
-      await ExamSchema.updateOne(
+      const updateExam = await ExamSchema.updateOne(
         { _id: exams[i]._id },
         {
           status: "Closed",
         }
       );
+      await updateExam.save();
     } else {
       const startTime = new Date(
         `${exams[i].startDate} ${exams[i].startTimeAt}`
