@@ -33,6 +33,23 @@ app.use((req, res, next) => {
   next();
 });
 
+//Config
+app.use(bodyParser.json());
+
+//Make Static Photos Available
+app.use(express.static("profileImgs"));
+
+//Cookie Parser
+app.use(cookieParser());
+
+app.use(
+  cors({
+    credential: true,
+    // origin: true,
+    origin: "https://online-exam-system-9b41e.web.app/",
+  })
+);
+
 //Database Stuff
 mongoose
   .connect(process.env.DB_URI, {
@@ -47,23 +64,6 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
-
-//Config
-app.use(bodyParser.json());
-
-//Make Static Photos Available
-app.use(express.static("profileImgs"));
-
-//Cookie Parser
-app.use(cookieParser());
-
-app.use(
-  cors({
-    credential: true,
-    // origin: true,
-    origin: "https://online-exam-system-9b41e.web.app",
-  })
-);
 
 //Routes
 app.get("/", (req, res) => {
