@@ -88,6 +88,7 @@ const createNewShare = async (req, res) => {
 
 const GetStSharedExams = async (req, res) => {
   const myExams = await ShareSchema.find({ studentId: req.params.id });
+  const dateNow = new Date();
   for (let i = 0; i < myExams.length; i++) {
     const examDate = new Date(
       `${myExams[i].startDate} ${myExams[i].endTimeAt}`
