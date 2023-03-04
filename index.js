@@ -33,6 +33,21 @@ app.use((req, res, next) => {
   next();
 });
 
+//Database Stuff
+mongoose
+  .connect(process.env.DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Mongo Db Connected .."))
+  .then(() => {
+    //Starting server
+    app.listen(process.env.PORT || 3000, () => {
+      console.log(`Listining at port ${process.env.PORT || 3000}`);
+    });
+  })
+  .catch((err) => console.log(err));
+
 //Config
 app.use(bodyParser.json());
 
@@ -49,21 +64,6 @@ app.use(
     origin: "https://online-exam-system-9b41e.web.app/",
   })
 );
-
-//Database Stuff
-mongoose
-  .connect(process.env.DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Mongo Db Connected .."))
-  .then(() => {
-    //Starting server
-    app.listen(process.env.PORT || 3000, () => {
-      console.log(`Listining at port ${process.env.PORT || 3000}`);
-    });
-  })
-  .catch((err) => console.log(err));
 
 //Routes
 app.get("/", (req, res) => {
