@@ -3,33 +3,38 @@ const ShareSchema = require("../models/shares/shareExam");
 
 //Instructor Exams
 const updateExamWar = async (req, res, next) => {
-  const exams = await ExamSchema.find({ instructorUserId: req.params.id });
-  const dateNow = new Date();
-  for (let i = 0; i < exams.length; i++) {
-    const examDate = new Date(`${exams[i].startDate} ${exams[i].endTimeAt}`);
-    if (examDate - dateNow < 0) {
-      await ExamSchema.updateOne(
-        { _id: exams[i]._id },
-        {
-          status: "Closed",
-        }
-      );
-    } else {
-      const startTime = new Date(
-        `${exams[i].startDate} ${exams[i].startTimeAt}`
-      );
-      const timeNow = new Date();
-      if (startTime - timeNow < 0) {
+  try {
+    const exams = await ExamSchema.find({ instructorUserId: req.params.id });
+    const dateNow = new Date();
+    for (let i = 0; i < exams.length; i++) {
+      const examDate = new Date(`${exams[i].startDate} ${exams[i].endTimeAt}`);
+      if (examDate - dateNow < 0) {
         await ExamSchema.updateOne(
           { _id: exams[i]._id },
           {
-            status: "Open",
+            $set: { status: "Closed" },
           }
         );
+      } else {
+        const startTime = new Date(
+          `${exams[i].startDate} ${exams[i].startTimeAt}`
+        );
+        const timeNow = new Date();
+        if (startTime - timeNow < 0) {
+          await ExamSchema.updateOne(
+            { _id: exams[i]._id },
+            {
+              $set: { status: "Open" },
+            }
+          );
+        }
       }
     }
+    next();
+  } catch (error) {
+    console.log(error);
+    res.json({ error: true });
   }
-  next();
 };
 
 //Students Exams
