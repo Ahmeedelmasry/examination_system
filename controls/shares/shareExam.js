@@ -88,6 +88,22 @@ const createNewShare = async (req, res) => {
 
 const GetStSharedExams = async (req, res) => {
   const myExams = await ShareSchema.find({ studentId: req.params.id });
+  for (let i = 0; i < myExams.length; i++) {
+    const examDate = new Date(
+      `${myExams[i].startDate} ${myExams[i].endTimeAt}`
+    );
+    if (examDate - dateNow < 0) {
+      myExams[i].status = "Closed";
+    } else {
+      const startTime = new Date(
+        `${myExams[i].startDate} ${myExams[i].startTimeAt}`
+      );
+      const timeNow = new Date();
+      if (startTime - timeNow < 0) {
+        myExams[i].status = "Open";
+      }
+    }
+  }
   res.json(myExams);
 };
 

@@ -13,6 +13,20 @@ const deleteExam = async (req, res) => {
 
 const getAllExams = async (req, res) => {
   const exams = await ExamSchema.find({ instructorUserId: req.params.id });
+  for (let i = 0; i < exams.length; i++) {
+    const examDate = new Date(`${exams[i].startDate} ${exams[i].endTimeAt}`);
+    if (examDate - dateNow < 0) {
+      exams[i].status = "Closed";
+    } else {
+      const startTime = new Date(
+        `${exams[i].startDate} ${exams[i].startTimeAt}`
+      );
+      const timeNow = new Date();
+      if (startTime - timeNow < 0) {
+        exams[i].status = "Open";
+      }
+    }
+  }
   res.json(exams);
 };
 

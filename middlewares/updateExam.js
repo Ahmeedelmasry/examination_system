@@ -14,7 +14,6 @@ const updateExamWar = async (req, res, next) => {
           status: "Closed",
         }
       );
-      exams[i].status = "Closed";
     } else {
       const startTime = new Date(
         `${exams[i].startDate} ${exams[i].startTimeAt}`
@@ -27,7 +26,6 @@ const updateExamWar = async (req, res, next) => {
             status: "Open",
           }
         );
-        exams[i].status = "Open";
       }
     }
   }
