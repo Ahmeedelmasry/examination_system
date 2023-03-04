@@ -20,18 +20,17 @@ const updateExamWar = async (req, res, next) => {
       );
       const timeNow = new Date();
       if (startTime - timeNow < 0) {
-        await ExamSchema.updateOne(
+        const updateExam = await ExamSchema.updateOne(
           { _id: exams[i]._id },
           {
             status: "Open",
           }
         );
+        await updateExam.save();
       }
     }
   }
-  setTimeout(() => {
-    next();
-  }, 1000);
+  next();
 };
 
 //Students Exams
