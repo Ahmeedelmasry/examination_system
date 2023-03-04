@@ -12,7 +12,7 @@ const {
 
 router.post("/new/add", addExam);
 router.delete("/delete/:id", deleteExam);
-router.get("/all/:id", getAllExams);
+router.get("/all/:id", updateExamWar, getAllExams);
 router.get("/signle-exam/:id", getOneExam);
 router.put("/update/:id", updateExam);
 
