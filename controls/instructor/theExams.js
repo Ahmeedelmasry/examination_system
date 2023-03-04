@@ -13,7 +13,39 @@ const deleteExam = async (req, res) => {
 
 const getAllExams = async (req, res) => {
   const exams = await ExamSchema.find({ instructorUserId: req.params.id });
-  res.json(exams);
+  //
+  //
+  for (let i = 0; i < exams.length; i++) {
+    const examDate = new Date(`${exams[i].startDate} ${exams[i].endTimeAt}`);
+    const dateNow = new Date();
+    if (examDate - dateNow < 0) {
+      await ExamSchema.updateOne(
+        { _id: exams[i]._id },
+        {
+          status: "Closed",
+        }
+      );
+    } else {
+      const startTime = new Date(
+        `${exams[i].startDate} ${exams[i].startTimeAt}`
+      );
+      const timeNow = new Date();
+      if (startTime - timeNow < 0) {
+        await ExamSchema.updateOne(
+          { _id: exams[i]._id },
+          {
+            status: "Open",
+          }
+        );
+      }
+    }
+  }
+  setTimeout(async () => {
+    const examsUpdated = await ExamSchema.find({
+      instructorUserId: req.params.id,
+    });
+    res.json(examsUpdated);
+  }, 1000);
 };
 
 const getOneExam = async (req, res) => {

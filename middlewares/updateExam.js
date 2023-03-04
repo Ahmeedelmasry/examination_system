@@ -14,24 +14,12 @@ const updateExamWar = async (req, res, next) => {
           status: "Closed",
         }
       );
-      await ExamSchema.updateOne(
-        { _id: exams[i]._id },
-        {
-          status: "Closed",
-        }
-      );
     } else {
       const startTime = new Date(
         `${exams[i].startDate} ${exams[i].startTimeAt}`
       );
       const timeNow = new Date();
       if (startTime - timeNow < 0) {
-        await ExamSchema.updateOne(
-          { _id: exams[i]._id },
-          {
-            status: "Open",
-          }
-        );
         await ExamSchema.updateOne(
           { _id: exams[i]._id },
           {
