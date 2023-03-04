@@ -14,7 +14,6 @@ const updateExamWar = async (req, res, next) => {
           status: "Closed",
         }
       );
-      await updateExam.save();
     } else {
       const startTime = new Date(
         `${exams[i].startDate} ${exams[i].startTimeAt}`
@@ -27,11 +26,12 @@ const updateExamWar = async (req, res, next) => {
             status: "Open",
           }
         );
-        await updateExam.save();
       }
     }
   }
-  next();
+  setTimeout(() => {
+    next();
+  }, 1000);
 };
 
 //Students Exams
