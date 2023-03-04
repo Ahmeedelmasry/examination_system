@@ -45,36 +45,35 @@ const updateExamWar = async (req, res, next) => {
 //Students Exams
 const updateStExamWar = async (req, res, next) => {
   const myExams = await ShareSchema.find({ studentId: req.params.id });
+  const dateNow = isHosted
+    ? new Date(new Date().getTime() + 2 * 60 * 60 * 1000)
+    : new Date();
   if (myExams) {
     myExams.forEach(async (e) => {
       let beforeUpdate = e.exams;
       beforeUpdate.forEach((exam) => {
         //Check If Exam Date Passed
         const examDate = new Date(`${exam.startDate} ${exam.endTimeAt}`);
-        const dateNow = new Date();
         if (examDate - dateNow < 0) {
           exam.status = "Closed";
         } else {
           const startTime = new Date(`${exam.startDate} ${exam.startTimeAt}`);
-          const timeNow = new Date();
-          if (startTime - timeNow < 0) {
+          if (startTime - dateNow < 0) {
             exam.status = "Open";
           } else {
             exam.status = "Pending";
           }
         }
       });
-      const updateExam = await ShareSchema.updateOne(
+      await ShareSchema.updateOne(
         {
           _id: e._id,
         },
-        { exams: beforeUpdate }
+        { $set: { exams: beforeUpdate } }
       );
     });
   }
-  setTimeout(() => {
-    next();
-  }, 200);
+  next();
 };
 
 module.exports = { updateExamWar, updateStExamWar };
