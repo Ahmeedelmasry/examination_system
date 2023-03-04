@@ -33,6 +33,7 @@ const updateExamWar = async (req, res, next) => {
         }
       }
     }
+    console.log("test");
     next();
   } catch (error) {
     console.log(error);
