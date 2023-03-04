@@ -31,7 +31,7 @@ const updateExamWar = async (req, res, next) => {
   }
   setTimeout(() => {
     next();
-  }, 500);
+  }, 1000);
 };
 
 //Students Exams
