@@ -14,6 +14,7 @@ const deleteExam = async (req, res) => {
 const getAllExams = async (req, res) => {
   try {
     const exams = await ExamSchema.find({ instructorUserId: req.params.id });
+    console.log("Exams Updated");
     res.json(exams);
   } catch (error) {
     console.log(error);
