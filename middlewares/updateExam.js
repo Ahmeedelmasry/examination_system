@@ -30,7 +30,9 @@ const updateExamWar = async (req, res, next) => {
         }
       }
     }
-    next();
+    setTimeout(() => {
+      next();
+    }, 1000);
   } catch (error) {
     console.log(error);
     res.json({ error: true });
