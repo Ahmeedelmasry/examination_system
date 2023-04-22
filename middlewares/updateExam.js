@@ -1,7 +1,7 @@
 const ExamSchema = require("../models/instructor/theExams");
 const ShareSchema = require("../models/shares/shareExam");
 //Change this before push
-const isHosted = false;
+const isHosted = true;
 
 //Instructor Exams
 const updateExamWar = async (req, res, next) => {
