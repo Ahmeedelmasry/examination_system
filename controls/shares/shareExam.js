@@ -32,7 +32,6 @@ const sendEmailFunc = (req, res, payload) => {
       console.log(err);
       res.status(400).json({ error: "Something went wrong, Please try again" });
     } else {
-      console.log("Sent");
       res.json({ message: "Exam Shared Successfully" });
     }
   });
@@ -105,7 +104,6 @@ const GetStSharedExams = async (req, res) => {
       }
     }
   }
-  console.log(myExams);
   res.json(myExams);
 };
 

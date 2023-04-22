@@ -60,6 +60,13 @@ const getOneUserById = async (req, res) => {
 
 const postSignup = async (req, res) => {
   try {
+    let emailDomain = req.body.email.split("@");
+    const ext = emailDomain[emailDomain.length - 1];
+    if (req.body.email && ext !== "fci.zu.edu.eg") {
+      return res.status(400).json({
+        errors: { email: "Email address must end with 'fci.zu.edu.eg'" },
+      });
+    }
     let newUser = await SignUp.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,

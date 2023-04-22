@@ -9,7 +9,6 @@ const getFollowedInstructor = async (req, res) => {
 };
 
 const addNewFollow = async (req, res) => {
-  console.log(req.body);
   const newFollow = new FollowSchema(req.body);
   const savedFollow = await newFollow.save();
   res.json(savedFollow);
