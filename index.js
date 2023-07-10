@@ -16,6 +16,7 @@ const doFollow = require("./routes/follows/followRoute");
 const shareExam = require("./routes/shares/shareExam");
 const savedUrls = require("./routes/students/savedUrls");
 const stNotifs = require("./routes/students/notifications");
+const generateExam = require("./routes/pdf_exam/generateExam");
 
 //Create our express app
 const app = express();
@@ -23,7 +24,7 @@ const app = express();
 //Handle Cors and Middleware
 app.use((req, res, next) => {
   res
-    .header("Access-Control-Allow-Origin", process.env.HOST_ORIGIN)
+    .header("Access-Control-Allow-Origin", process.env.LOCAL_HOST)
     .header("Access-Control-Allow-Methods", "GET, POST, HEAD, PUT, DELETE")
     .header(
       "Access-Control-Allow-Headers",
@@ -66,8 +67,8 @@ mongoose
   .catch((err) => console.log(err));
 
 //Routes
-app.get("/", (req, res) => {
-  res.send({ message: "Hello" });
+app.get("/", async (req, res) => {
+  res.json({ message: "Hello" });
 });
 
 //User Routes
@@ -80,3 +81,4 @@ app.use("/follows", doFollow);
 app.use("/shares", shareExam);
 app.use("/saved-urls", savedUrls);
 app.use("/st-notifs", stNotifs);
+app.use("/generate-exam", generateExam);

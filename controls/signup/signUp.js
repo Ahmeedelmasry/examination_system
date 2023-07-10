@@ -2,7 +2,6 @@ const SignUp = require("../../models/signup/signUp");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const path = require("path");
-const fs = require("fs");
 
 //Handle Errors
 const handleErrs = (err) => {

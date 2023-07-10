@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.6",
@@ -18,9 +19,14 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
+    "form-data": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash.shuffle": "^4.2.0",
     "mongoose": "^6.6.5",
+    "natural": "^6.5.0",
     "nodemailer": "^6.8.0",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^3.7.107",
     "validator": "^13.7.0"
   },
   "devDependencies": {
