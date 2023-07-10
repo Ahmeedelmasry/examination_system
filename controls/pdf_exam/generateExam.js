@@ -69,9 +69,9 @@ const chatWithPdf = async (sourceId) => {
     messages: [
       {
         role: "user",
-        content: `generate 5 questions from this content and give 4 choices to each 
-          question and the correct answer in json format, need format to be like:
-           questions: [{question: '', correct_answer: index, choices:[]}]
+        content: `generate 6 questions from this content and give 4 choices to each 
+        question and the correct answer in json format, need format to be like:
+         questions: [{question: '', correct_answer: index, choices:[]}]
           `,
       },
     ],
