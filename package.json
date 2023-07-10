@@ -26,7 +26,6 @@
     "natural": "^6.5.0",
     "nodemailer": "^6.8.0",
     "pdf-parse": "^1.1.1",
-    "pdfjs-dist": "^3.7.107",
     "validator": "^13.7.0"
   },
   "devDependencies": {
