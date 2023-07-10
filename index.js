@@ -24,7 +24,7 @@ const app = express();
 //Handle Cors and Middleware
 app.use((req, res, next) => {
   res
-    .header("Access-Control-Allow-Origin", process.env.LOCAL_HOST)
+    .header("Access-Control-Allow-Origin", process.env.HOST_ORIGIN)
     .header("Access-Control-Allow-Methods", "GET, POST, HEAD, PUT, DELETE")
     .header(
       "Access-Control-Allow-Headers",
